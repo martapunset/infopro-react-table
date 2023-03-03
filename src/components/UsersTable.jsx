@@ -12,9 +12,8 @@ export const UsersTable = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await getUsers();
-      console.log(response);
       setData(response);
-      console.log(data);
+
     }
     fetchData();
   }, []);
@@ -29,9 +28,6 @@ export const UsersTable = () => {
   const sortedData = filteredData?.sort((a, b) => {
     const columnA = a[sortColumn];
     const columnB = b[sortColumn];
-    console.log();
-    console.log(columnB);
-    console.log(columnA);
 
     if (sortDirection === "asc") {
       return columnA?.toString().localeCompare(columnB.toString());
