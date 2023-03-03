@@ -1,13 +1,16 @@
-import { getUsers } from "./api/fetchUsers"
 
+import { UsersTable } from "./components/UsersTable"
 
 
 
 function App() {
-  getUsers()
+  //getUsers()
+
+
+
   return (
     <div className="App">
-    hello world``
+ <UsersTable/>
     </div>
   )
 }
