@@ -38,8 +38,22 @@ export const UsersTable = () => {
     } else if (sortDirection === "desc") {
       return columnB?.toString().localeCompare(columnA.toString());
     }
+    //for numbers
+    if (sortDirection === "ascNum") {
+      return columnA > columnB ? 1 : -1;
+    } else if (sortDirection === "descNum") {
+      return columnB > columnA ? 1 : -1;
+    }
   });
 
+  const handleSortNumber = (column) => {
+    if (column === sortColumn) {
+      setSortDirection(sortDirection === "ascNum" ? "descNum" : "ascNum");
+    } else {
+      setSortColumn(column);
+      setSortDirection("asc");
+    }
+  };
   const handleSort = (column) => {
     if (column === sortColumn) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
@@ -57,16 +71,16 @@ export const UsersTable = () => {
     <TableWrapper>
       <TableHeader>
         <TableRow>
-          <TableData onClick={() => handleSort("id")}>
+          <TableData onClick={() => handleSortNumber("id")}>
             {sortColumn === "id" && sortDirection === "ascNum" ? "▲" : " "}
             {sortColumn === "id" && sortDirection === "descNum" ? "▼" : " "}
             Id usuario
           </TableData>
-          <TableData onClick={() => handleSort("codigo_usuario")}>
-            {sortColumn === "codigo_usuario" && sortDirection === "asc"
+          <TableData onClick={() => handleSortNumber("codigo_usuario")}>
+            {sortColumn === "codigo_usuario" && sortDirection === "ascNum"
               ? "▲"
               : " "}
-            {sortColumn === "codigo_usuario" && sortDirection === "desc"
+            {sortColumn === "codigo_usuario" && sortDirection === "descNum"
               ? "▼"
               : " "}
             Código de usuario
