@@ -1,1 +1,0 @@
-# infopro-react-table
