@@ -62,72 +62,91 @@ export const UsersTable = () => {
       setSortDirection("asc");
     }
   };
+  const handleFilterChange = (e) => {
+    const { value } = e.target;
+
+    setFilterValue(value);
+    setFilterValue(value);
+  };
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
   return (
-    <TableWrapper>
-      <TableHeader>
-        <TableRow>
-          <TableData onClick={() => handleSortNumber("id")}>
-            {sortColumn === "id" && sortDirection === "ascNum" ? "▲" : " "}
-            {sortColumn === "id" && sortDirection === "descNum" ? "▼" : " "}
-            Id usuario
-          </TableData>
-          <TableData onClick={() => handleSortNumber("codigo_usuario")}>
-            {sortColumn === "codigo_usuario" && sortDirection === "ascNum"
-              ? "▲"
-              : " "}
-            {sortColumn === "codigo_usuario" && sortDirection === "descNum"
-              ? "▼"
-              : " "}
-            Código de usuario
-          </TableData>
-          <TableData onClick={() => handleSort("nombre_usuario")}>
-            {sortColumn === "nombre_usuario" && sortDirection === "asc"
-              ? "▲"
-              : " "}
-            {sortColumn === "nombre_usuario" && sortDirection === "desc"
-              ? "▼"
-              : " "}
-            Nombre de usuario
-          </TableData>
-          <TableData onClick={() => handleSort("contrasena")}>
-            {sortColumn === "contrasena" && sortDirection === "asc" ? "▲" : " "}
-            {sortColumn === "contrasena" && sortDirection === "desc"
-              ? "▼"
-              : " "}
-            Contraseña
-          </TableData>
-          <TableData onClick={() => handleSort("fecha_alta")}>
-            {sortColumn === "fecha_alta" && sortDirection === "asc" ? "▲" : " "}
-            {sortColumn === "fecha_alta" && sortDirection === "desc"
-              ? "▼"
-              : " "}
-            Fecha de alta
-          </TableData>
-          <TableData onClick={() => handleSort("activo")}>
-            {sortColumn === "activo" && sortDirection === "asc" ? "▲" : " "}
-            {sortColumn === "activo" && sortDirection === "desc" ? "▼" : " "}
-            Activo
-          </TableData>
-        </TableRow>
-      </TableHeader>
-      <tbody>
-        {sortedData.map((row) => (
-          <TableRow key={row.id}>
-            <TableData>{row.id}</TableData>
-            <TableData>{row.codigo_usuario}</TableData>
-            <TableData>{row.nombre_usuario}</TableData>
-            <TableData>{row.contrasena}</TableData>
-            <TableData>{row.fecha_alta}</TableData>
-            <TableData>{row.activo ? "Si" : "No"}</TableData>
+    <>
+      <SearchInput
+        placeholder="Search by Id, Nombre de usuario..."
+        type="text"
+        name="id"
+        value={filterValue}
+        onChange={handleFilterChange}
+      />
+      <TableWrapper>
+        <TableHeader>
+          <TableRow>
+            <TableData onClick={() => handleSortNumber("id")}>
+              {sortColumn === "id" && sortDirection === "ascNum" ? "▲" : " "}
+              {sortColumn === "id" && sortDirection === "descNum" ? "▼" : " "}
+              Id
+            </TableData>
+            <TableData onClick={() => handleSortNumber("codigo_usuario")}>
+              {sortColumn === "codigo_usuario" && sortDirection === "ascNum"
+                ? "▲"
+                : " "}
+              {sortColumn === "codigo_usuario" && sortDirection === "descNum"
+                ? "▼"
+                : " "}
+              Código de usuario
+            </TableData>
+            <TableData onClick={() => handleSort("nombre_usuario")}>
+              {sortColumn === "nombre_usuario" && sortDirection === "asc"
+                ? "▲"
+                : " "}
+              {sortColumn === "nombre_usuario" && sortDirection === "desc"
+                ? "▼"
+                : " "}
+              Nombre de usuario
+            </TableData>
+            <TableData onClick={() => handleSort("contrasena")}>
+              {sortColumn === "contrasena" && sortDirection === "asc"
+                ? "▲"
+                : " "}
+              {sortColumn === "contrasena" && sortDirection === "desc"
+                ? "▼"
+                : " "}
+              Contraseña
+            </TableData>
+            <TableData onClick={() => handleSort("fecha_alta")}>
+              {sortColumn === "fecha_alta" && sortDirection === "asc"
+                ? "▲"
+                : " "}
+              {sortColumn === "fecha_alta" && sortDirection === "desc"
+                ? "▼"
+                : " "}
+              Fecha de alta
+            </TableData>
+            <TableData onClick={() => handleSort("activo")}>
+              {sortColumn === "activo" && sortDirection === "asc" ? "▲" : " "}
+              {sortColumn === "activo" && sortDirection === "desc" ? "▼" : " "}
+              Activo
+            </TableData>
           </TableRow>
-        ))}
-      </tbody>
-    </TableWrapper>
+        </TableHeader>
+        <tbody>
+          {sortedData.map((row) => (
+            <TableRow key={row.id}>
+              <TableData>{row.id}</TableData>
+              <TableData>{row.codigo_usuario}</TableData>
+              <TableData>{row.nombre_usuario}</TableData>
+              <TableData>{row.contrasena}</TableData>
+              <TableData>{row.fecha_alta}</TableData>
+              <TableData>{row.activo ? "Si" : "No"}</TableData>
+            </TableRow>
+          ))}
+        </tbody>
+      </TableWrapper>
+    </>
   );
 };
 
@@ -151,4 +170,9 @@ const TableRow = styled.tr`
 const TableData = styled.td`
   padding: 8px;
   border: 1px solid #ddd;
+`;
+const SearchInput = styled.input`
+  padding: 10px;
+  width: 60%;
+  margin: 10px;
 `;

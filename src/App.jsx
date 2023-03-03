@@ -1,19 +1,12 @@
-
-import { UsersTable } from "./components/UsersTable"
-
-
+import { UsersTable } from "./components/UsersTable";
 
 function App() {
-  //getUsers()
-
-
-
   return (
     <div className="App">
       <h1>Users Data</h1>
- <UsersTable/>
+      <UsersTable />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
